@@ -18,11 +18,12 @@ module.exports.register = async (req, res) => {
                     email,
                     password: hashedPass
                 })
-                return res.status(201).json({ msg: 'Your account has been created!' })
+                const token = createToken({id: user._id, name: user.name})
+                return res.status(201).json({ msg: 'Your account has been created!', token })
             }
             else {
                 // email already taken
-                return res.status(401).json({ errors: [{ msg: `${email} has already taken` }] })
+                return res.status(401).json({ errors: [{ msg: `${email} has already taken`, param: 'email' }] })
             }
         }
         catch (error) {
@@ -45,16 +46,16 @@ module.exports.login = async (req, res) => {
     if (errors.isEmpty()) {
         const user = await UserModel.findOne({ email })
         if (user) {
-            if (comparePassword(password, user.password)) {
+            if (await comparePassword(password, user.password)) {
                 const token = createToken({ id: user._id, name: user.name })
                 return res.status(201).json({ token, admin: user.admin })
             }
             else {
-                return res.status(401).json({ errors: [{ msg: 'Password is not matched' }] })
+                return res.status(401).json({ errors: [{ msg: 'Password is not matched', param: 'password' }] })
             }
         }
         else {
-            return res.status(401).json({ errors: [{ msg: `${email} is not found` }] })
+            return res.status(401).json({ errors: [{ msg: `${email} is not found`, param: 'email' }] })
         }
     }
     else {
