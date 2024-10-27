@@ -13,14 +13,22 @@ import EditProduct from '../screens/dashboard/editProduct'
 import Home from '../screens/home/home'
 import Login from '../screens/home/login'
 import Register from '../screens/home/register'
+import Dashboard from '../screens/users/dashboard'
+import UserAuthRoute from './userAuthRoute'
+import UserRoute from './userRoute'
 
 const Routing = () => {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
+                <Route element={<UserAuthRoute />}>
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
+                </Route>
+                <Route element={<UserRoute />}>
+                    <Route path='/user' element={<Dashboard />} />
+                </Route>
                 <Route path='auth'>
                     <Route path='admin-login' element={
                         <Public>
