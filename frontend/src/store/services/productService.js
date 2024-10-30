@@ -61,11 +61,27 @@ const productService = createApi({
                     }
                 },
                 providesTags: ['product']
+            }),
+            getProductByCategory: builder.query({
+                query: (params) => {
+                    return {
+                        url: `get-by-category/${params.name}/${params.page}`,
+                        method: 'GET'
+                    }
+                }
+            }),
+            searchProduct: builder.query({
+                query: (params) => {
+                    return {
+                        url: `search/${params.keyword}/${params.page}`,
+                        method: 'GET'
+                    }
+                }
             })
         }
     }
 })
 
-export const { useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation, useGetProductQuery, useFetchProductQuery } = productService
+export const { useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation, useGetProductQuery, useFetchProductQuery, useGetProductByCategoryQuery, useSearchProductQuery } = productService
 
 export default productService

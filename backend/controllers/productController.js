@@ -25,7 +25,7 @@ class ProductController {
                     ) {
                         const imageName = uuidv4() + `.${extension}`
                         const __dirname = path.resolve()
-                        const newPath = __dirname + `/../client/public/images/${imageName}`
+                        const newPath = __dirname + `/../frontend/public/images/${imageName}`
                         images[`image${i + 1}`] = imageName
                         fs.copyFile(file.filepath, newPath, (err) => {
                             if (err) {
@@ -65,7 +65,7 @@ class ProductController {
                     }
                     catch (error) {
                         console.log(error);
-                        return res.status(500).json({errors: errors.array()});
+                        return res.status(500).json({ errors: errors.array() });
                     }
                 }
                 else {
@@ -130,6 +130,34 @@ class ProductController {
         catch (error) {
             console.log(error.message);
             return res.status(500).json({ errors: [{ msg: 'Server internal error!' }] });
+        }
+    }
+
+    async search(req, res) {
+        const { name, page, keyword } = req.params
+        const perPage = 12
+        const skip = (page - 1) * perPage
+        const options = name
+            ? { category: name }
+            : keyword && { title: { $regex: `${keyword}`, $options: "i" } }
+
+        if (page) {
+            try {
+                const count = await ProductModel.find({ ...options })
+                    .countDocuments()
+                const products = await ProductModelfind({ ...options })
+                    .skip(skip)
+                    .limit(perPage)
+                    .sort({ updatedAt: -1 })
+                return res.status(200).json({ products: products, perPage, count })
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+        else {
+            const products = await ProductModel.find({ ...options })
+                .sort({ updatedAt: -1 })
+            return res.status(200).json({ products: products })
         }
     }
 }

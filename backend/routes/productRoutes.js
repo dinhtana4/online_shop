@@ -33,4 +33,14 @@ router.get(
    ProductController.fetch
 )
 
+router.get(
+    "/get-by-category/:name/:page?",
+    ProductController.search
+)
+
+router.get(
+    "/search/:keyword/:page?",
+    ProductController.search
+)
+
 module.exports = router;

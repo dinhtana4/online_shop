@@ -106,3 +106,6 @@ https://react-icons.github.io/react-icons/
 
 # npm install framer-motion
 An open source motion library for React, made by Framer.
+
+# npm install swiper
+https://swiperjs.com/get-started
