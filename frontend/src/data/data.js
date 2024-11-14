@@ -14,3 +14,15 @@ const Sizes = [
   export default {
     Sizes
   }
+
+  export const LocalStorageKey = {
+    USER_TOKEN: 'user-token',
+    ADMIN_TOKEN: 'admin-token',
+    CART: 'cart'
+  }
+
+  export const ReducerApp = {
+    AUTH: 'auth',
+    GLOBAL: 'global',
+    CART: 'cart'
+  }

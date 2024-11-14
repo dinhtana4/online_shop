@@ -109,3 +109,9 @@ An open source motion library for React, made by Framer.
 
 # npm install swiper
 https://swiperjs.com/get-started
+
+# npm install html2plaintext
+Convert html-formatted text to plaintext
+
+# npm install html-react-parser
+The parser converts an HTML string to one or more React elements

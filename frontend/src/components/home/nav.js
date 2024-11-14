@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { BsHandbag } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import {toggleSearchBar} from '../../store/reducers/globalReducer'
+import { toggleSearchBar } from '../../store/reducers/globalReducer'
+import Search from "./search"
 
 const Nav = () => {
     const { userToken, user } = useSelector((state) => state.authReducer)
     const dispatch = useDispatch()
+
     return (
         <>
             <nav className="nav">
@@ -23,21 +25,22 @@ const Nav = () => {
                                 <li className="nav-li">
                                     <Link to='/user' className="nav-link">{user?.name}</Link>
                                 </li>
-                            ): (
+                            ) : (
                                 <li className="nav-li">
                                     <Link to='/login' className="nav-link">sign in</Link>
                                 </li>
                             )}
                             <li className="nav-li relative">
                                 <Link to='/cart'>
-                                <BsHandbag size={20}/>
-                                <span className="nav-circle">10</span>
+                                    <BsHandbag size={20} />
+                                    <span className="nav-circle">10</span>
                                 </Link>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
+            <Search />
         </>
     )
 }

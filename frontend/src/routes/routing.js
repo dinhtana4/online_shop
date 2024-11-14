@@ -16,12 +16,20 @@ import Register from '../screens/home/register'
 import Dashboard from '../screens/users/dashboard'
 import UserAuthRoute from './userAuthRoute'
 import UserRoute from './userRoute'
+import Product from '../screens/home/product'
+import SearchProducts from '../screens/home/searchProducts'
+import CatProducts from '../screens/home/catProducts'
+import Cart from '../screens/home/cart'
 
 const Routing = () => {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Home />} />
+                <Route path='/product/:id' element={<Product />} />
+                <Route path='/search-products/:keyword/:page?' element={<SearchProducts />} />
+                <Route path='/cat-products/:name/:page?' element={<CatProducts />} />
+                <Route path='/cart' element={<Cart />} />
                 <Route element={<UserAuthRoute />}>
                     <Route path='/login' element={<Login />} />
                     <Route path='/register' element={<Register />} />

@@ -8,8 +8,6 @@ const HomeProduct = ({ category }) => {
         name: category.name,
         page: ""
     })
-
-    console.log(data)
     return isFetching ? (
         <ProductSkeleton />
     ) : (
@@ -25,7 +23,7 @@ const HomeProduct = ({ category }) => {
                 </div>
                 <div className='flex flex-wrap -mx-5'>
                     {data?.products.map((product) => (
-                        <ProductCard product={product} />
+                        <ProductCard product={product} key={product._id} />
                     ))}
                 </div>
             </>

@@ -4,6 +4,7 @@ import globalReducer from './reducers/globalReducer'
 import authService from "./services/authService"
 import categoryService from "./services/categoryService";
 import productService from "./services/productService";
+import cartReducer from "./reducers/cartReducer";
 
 const Store = configureStore({ 
     reducer: {
@@ -11,7 +12,8 @@ const Store = configureStore({
         [categoryService.reducerPath]: categoryService.reducer,
         [productService.reducerPath]: productService.reducer,
         authReducer: authReducer,
-        globalReducer: globalReducer
+        globalReducer: globalReducer,
+        cartReducer: cartReducer
     },
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware().concat([

@@ -9,7 +9,6 @@ import { useGetRandomCategoryQuery } from '../../store/services/categoryService'
 
 const Slider = () => {
     const { data, isFetching } = useGetRandomCategoryQuery()
-    console.log(data)
     return isFetching ? (
         <div className="my-container h-[70vh] flex items-center justify-center">
             <Spinner />

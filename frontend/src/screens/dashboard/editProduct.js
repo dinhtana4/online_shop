@@ -62,20 +62,20 @@ const EditProduct = () => {
   }
 
   useEffect(() => {
-    if(data?.product) {
+    if(!!data) {
       setState({
-        _id: data.product._id,
-        title: data.product.title,
-        price: data.product.price,
-        discount: data.product.discount,
-        stock: data.product.stock,
-        category: data.product.category,
-        colors: data.product.colors
+        _id: data._id,
+        title: data.title,
+        price: data.price,
+        discount: data.discount,
+        stock: data.stock,
+        category: data.category,
+        colors: data.colors
       })
-      setDescription(data.product.description)
-      setSizeList(data.product.sizes)
+      setDescription(data.description)
+      setSizeList(data.sizes)
     }
-  }, [data?.product])
+  }, [data])
 
   const [updateProduct, response] = useUpdateProductMutation()
 

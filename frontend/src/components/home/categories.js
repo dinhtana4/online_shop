@@ -7,7 +7,6 @@ import Thumbnail from '../skeleton/thumbnail'
 
 const Categories = () => {
   const { data, isFetching } = useGetAllCategoryQuery()
-  console.log(data)
   let i = 1
   return isFetching ? (
     <div className="flex flex-wrap -mx-4 mb-10">

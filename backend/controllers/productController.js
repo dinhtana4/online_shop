@@ -125,7 +125,7 @@ class ProductController {
         const { id } = req.params
         try {
             const product = await ProductModel.findOne({ _id: id })
-            return res.status(200).json({ product: product })
+            return res.status(200).json(product)
         }
         catch (error) {
             console.log(error.message);
@@ -135,6 +135,7 @@ class ProductController {
 
     async search(req, res) {
         const { name, page, keyword } = req.params
+        //console.log('search product', req.params)
         const perPage = 12
         const skip = (page - 1) * perPage
         const options = name
@@ -145,7 +146,7 @@ class ProductController {
             try {
                 const count = await ProductModel.find({ ...options })
                     .countDocuments()
-                const products = await ProductModelfind({ ...options })
+                const products = await ProductModel.find({ ...options })
                     .skip(skip)
                     .limit(perPage)
                     .sort({ updatedAt: -1 })
