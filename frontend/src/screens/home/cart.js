@@ -7,12 +7,14 @@ import Nav from '../../components/home/nav'
 import { discount } from "../../utils/discount"
 import Quantity from "../../components/home/quantity"
 import { increaseQuantity, decreaseQuantity, removeItem } from "../../store/reducers/cartReducer"
+import { useSendPaymentMutation } from "../../store/services/paymentService"
 
 const Cart = () => {
     const { cart, total } = useSelector(state => state.cartReducer)
     console.log(cart)
     const { userToken, user } = useSelector(state => state.authReducer)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const increase = (id) => {
         dispatch(increaseQuantity(id))
     }
@@ -20,11 +22,26 @@ const Cart = () => {
         dispatch(decreaseQuantity(id))
     }
     const remove = (id) => {
-        dispatch(removeItem(id))
+        // verify user that you are really want to delete the project or item
+        if (window.confirm("Are you sure you want to delete this item?")) {
+            dispatch(removeItem(id));
+        }
     }
+    const [sendPayment, response] = useSendPaymentMutation()
     const pay = () => {
-
+        if (userToken) {
+            sendPayment({cart, id: user.id})
+        }
+        else {
+            navigate('/login')
+        }
     }
+    useEffect(() => {
+        if(response.isSuccess) {
+            console.log(response)
+            window.location.href = response.data.url
+        }
+    }, [response])
     return (
         <>
             <Nav />
