@@ -33,3 +33,6 @@ A Node.js module for parsing form data, especially file uploads.
 
 # npm install uuid
 To create a random UUID
+
+# npm install stripe
+https://docs.stripe.com/payments/accept-a-payment?lang=node

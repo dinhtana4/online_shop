@@ -7,6 +7,7 @@ import Search from "./search"
 
 const Nav = () => {
     const { userToken, user } = useSelector((state) => state.authReducer)
+    const {items} = useSelector(state => state.cartReducer)
     const dispatch = useDispatch()
 
     return (
@@ -33,7 +34,7 @@ const Nav = () => {
                             <li className="nav-li relative">
                                 <Link to='/cart'>
                                     <BsHandbag size={20} />
-                                    <span className="nav-circle">10</span>
+                                    <span className="nav-circle">{items}</span>
                                 </Link>
                             </li>
                         </ul>

@@ -4,6 +4,7 @@ const connect = require('./config/db')
 const userRoutes = require('./routes/userRoutes')
 const categoryRoutes = require('./routes/categoryRoutes')
 const productRoutes = require('./routes/productRoutes')
+const paymentRoutes = require('./routes/paymentRoutes')
 const cors = require('cors')
 const app = express()
 
@@ -16,6 +17,7 @@ app.use(cors())
 app.use('/api/user', userRoutes)
 app.use('/api/category', categoryRoutes)
 app.use('/api/product', productRoutes)
+app.use('/api/payment', paymentRoutes)
 
 app.get("/", (req, res) => {
     res.json({msg: 'Welcome to new shopify'})
