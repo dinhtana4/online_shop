@@ -30,14 +30,14 @@ const Cart = () => {
     const [sendPayment, response] = useSendPaymentMutation()
     const pay = () => {
         if (userToken) {
-            sendPayment({cart, id: user.id})
+            sendPayment({ cart, id: user.id })
         }
         else {
             navigate('/login')
         }
     }
     useEffect(() => {
-        if(response.isSuccess) {
+        if (response.isSuccess) {
             console.log(response)
             window.location.href = response.data.url
         }
@@ -122,7 +122,9 @@ const Cart = () => {
                             <div className="bg-indigo-50 p-4 flex justify-end mt-5 rounded-md">
                                 <div>
                                     <span className="text-lg font-semibold text-indigo-800 mr-10">
-                                        {total}
+                                        {
+                                            new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(total)
+                                        }
                                     </span>
                                     <button
                                         className="btn bg-indigo-600 text-sm font-medium py-2.5"

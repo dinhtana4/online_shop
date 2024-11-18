@@ -12,15 +12,26 @@ const app = express()
 connect()
 
 //add middleware
+app.post(
+    "/api/payment/webhook",
+    express.json({
+        verify: (req, res, buf) => {
+            console.log('rewrite rawBody payment')
+            req.rawBody = buf.toString();
+        },
+    })
+)
+
 app.use(express.json())
 app.use(cors())
+
 app.use('/api/user', userRoutes)
 app.use('/api/category', categoryRoutes)
 app.use('/api/product', productRoutes)
 app.use('/api/payment', paymentRoutes)
 
 app.get("/", (req, res) => {
-    res.json({msg: 'Welcome to new shopify'})
+    res.json({ msg: 'Welcome to new shopify' })
 })
 
 const port = env.PORT || 5000

@@ -36,3 +36,8 @@ To create a random UUID
 
 # npm install stripe
 https://docs.stripe.com/payments/accept-a-payment?lang=node
+Register webhook to receive payment progress status from Stripe
+https://docs.stripe.com/webhooks/quickstart
+stripe login
+stripe listen --forward-to localhost:5000/api/payment/webhook
+Note: Middlewares like express.json() or body-parser.json() should not be applied globally if they interfere with the Stripe webhook endpoint. You can limit raw body parsing to the webhook route as shown above.
